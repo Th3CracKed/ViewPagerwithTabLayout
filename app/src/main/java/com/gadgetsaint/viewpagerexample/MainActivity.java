@@ -21,8 +21,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private int[] defaultIcons = {
-            R.mipmap.star_default,
-            R.mipmap.settings_default
+            R.mipmap.star,
+            R.mipmap.settings
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
