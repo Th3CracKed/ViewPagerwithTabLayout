@@ -1,4 +1,2 @@
 # ViewPagerwithTabLayout
- The demo app for Tutorial Setting up ViewPager with Tabs in Android  
- For tutorial visit http://www.gadgetsaint.com/android/create-viewpager-tabs-android/
-# ViewPagerwithTabLayout
+A simple ViewPager With TabLayout on bottom like a BottomNavigationView but have left and right swipe functionnality
