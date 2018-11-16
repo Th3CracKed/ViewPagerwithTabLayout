@@ -1,5 +1,6 @@
 package com.gadgetsaint.viewpagerexample;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gadgetsaint.viewpagerexample.databinding.ActivityMainBinding;
 import com.gadgetsaint.viewpagerexample.fragments.FragmentOne;
 import com.gadgetsaint.viewpagerexample.fragments.FragmentTwo;
 
@@ -19,25 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private int[] defaultIcons = {
-            R.mipmap.star,
-            R.mipmap.settings
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ViewPager viewPager = findViewById(R.id.pager);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentOne(), "Trending");
         adapter.addFragment(new FragmentTwo(), "Settings");
-        viewPager.setAdapter(adapter);
+        binding.viewPager.setAdapter(adapter);
 
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        setupTabIcons(binding.tabLayout);
 
         setTitle(getString(R.string.app_name));
     }
@@ -55,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(textView);
     }
 
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(defaultIcons[0]);
-        tabLayout.getTabAt(1).setIcon(defaultIcons[1]);
+    private void setupTabIcons(TabLayout tabLayout) {
+        tabLayout.getTabAt(0).setIcon(R.mipmap.star);
+        tabLayout.getTabAt(1).setIcon(R.mipmap.settings);
     }
 
 
@@ -66,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
